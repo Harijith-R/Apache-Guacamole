@@ -2,6 +2,13 @@
 - name: Install mysql packages
   apt:
     name: "{{ guacamole_mysql_packages }}"
+- name: Create `/root/.my.cnf`  with root password credentials
+  copy:
+    src: my.cnf
+    dest: /root/.my.cnf
+    owner: root
+    mode: 0600
+    notify: Restart MySQL
 
 - name: Remove the test database
   mysql_db: name=test state=absent
