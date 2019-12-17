@@ -26,7 +26,7 @@ guacamole_mysql_packages: [
     'python-mysqldb',
     'mysql-server',
     'mysql-client',
-    'python-mysqldb' ]
+    'python3-pymysql' ]
 
 guacamole_server_url: "http://mirrors.estointernet.in/apache/guacamole/1.0.0/source/guacamole-server-1.0.0.tar.gz"
 guacamole_server_path: "/home/ansible/guacamole-serve/"
