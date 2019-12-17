@@ -60,6 +60,4 @@
     src: guacamole.properties
     dest: /etc/guacamole/guacamole.properties
 
-
-- import_tasks: mysql.yml
 - import_tasks: nginx.yml
