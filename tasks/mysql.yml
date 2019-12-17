@@ -1,0 +1,66 @@
+---
+- name: Install mysql packages
+  apt:
+    name: "{{ guacamole_mysql_packages }}"
+
+- name: Remove the test database
+  mysql_db: name=test state=absent
+
+- name: Create guacamole user for mysql
+  mysql_user: user="guacamole_user" host="localhost" password={{mysql_root_password}} priv=*.*:ALL,GRANT
+
+- name: Ensure anonymous users are not in the database
+  mysql_user: user='' host=$item state=absent
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Copy .my.cnf file with root password credentials
+  template: src=my.cnf dest=/etc/mysql/my.cnf owner=root mode=0600
+
+- name: Update mysql root password for all root accounts
+  mysql_user: name=root host={{item}} password={{mysql_root_password}}
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - localhost
+    
+- name: Create a new database with name 'guacamole_db'
+  mysql_db:
+    name: guacamole_db
+    state: present
+
+- name: Download the jdbc plugin
+  get_url: 
+    url: "{{ guacamole_jdbc_url }}"
+    dest: /home/ansible/guacamole-auth-jdbc-1.0.0.tar.gz
+
+- name: Extract the jdbc plugin
+  unarchive:
+    src: /home/ansible/guacamole-auth-jdbc-1.0.0.tar.gz
+    dest: "{{ guacamole_extension_path }}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+
+- name: create simlink to extension directory
+  file:
+    src: /home/ansible/guacamole-auth-jdbc-1.0.0/mysql/guacamole-auth-jdbc-mysql-1.0.0.jar
+    dest: "{{ guacamole_extension_path }}"
+    state: link
+
+- name: Download the mysql connector
+  get_url:
+    url: "{{ guacamole_jdbc_deb }}"
+    dest: /home/ansible/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb
+
+- name: install Mysql connector
+  apt:
+    deb: /home/ansible/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb
+
+- name: create a link to guacamole lib folder
+  file:
+    src: /usr/share/java/mysql-connector-java-8.0.18.jar
+    dest: /etc/guacamole/lib/mysql-connector-java-8.0.18.jar
+    state: link
+  
