@@ -2,8 +2,9 @@
 - name: Install mysql packages
   apt:
     name: "{{ guacamole_mysql_packages }}"
+    
 - name: Create `/root/.my.cnf`  with root password credentials
-  copy:
+  template:
     src: my.cnf
     dest: /root/.my.cnf
     owner: root
