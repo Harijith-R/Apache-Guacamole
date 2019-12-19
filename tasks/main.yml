@@ -1,29 +1,38 @@
 ---
+- name: Create Biuld folder
+  file:
+    path: /tmp/guacamole
+    state: directory
+  register:  tmp_folder
+
 - name: Create guacamole-server directories
   file:
-    path: "{{ guacamole_directories }}"
+    path: "{{ item }}"
+    recurse: yes
     state: directory
+  with_items: "{{ guacamole_directories }}"
 
 - name: Install Dependencies
   apt:
     name: "{{ guacamole_packages }}"
     state: present
+    update_cache: yes
 
 - name: Download Server Binary
   get_url:
     url: "{{ guacamole_server_url }}"
-    dest: /home/ansible/guacamole-server.tar.gz
+    dest: "{{ tmp_folder.path }}"
 
 - name: Download Client war file
   get_url:
-    url: "{{guacamole_client_url}}"
-    dest: "{{ guacamole_client_path }}"
+    url: "{{ guacamole_client_url }}"
+    dest: '{{ guacamole_client_path }}/guacamole.war'
   notify: restart tomcat
 
 - name: Extract the guacamole-server
   unarchive:
-    src: /home/ansible/guacamole-server.tar.gz
-    dest: "{{ guacamole_server_path }}"
+    src: '{{tmp_folder.path}}/{{ guacamole_server_version }}.tar.gz'
+    dest: "{{ tmp_folder.path }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
 
@@ -31,33 +40,86 @@
   command:
     cmd: ./configure --with-init-dir=/etc/init.d
   args:
-    chdir: "{{ guacamole_server_path }}"
+    chdir: "{{ tmp_folder.path }}"
 
 - name: Run Make
   make:
-    chdir: "{{ guacamole_server_path }}"
+    chdir: "{{ tmp_folder.path }}"
 
 - name: Run Make Install
   make:
-    chdir: "{{ guacamole_server_path }}"
+    chdir: "{{ tmp_folder.path }}"
     target: install
   notify: restart guacd
 
 - name: Download the Ldap plugin
   get_url: 
     url: "{{ guacamole_ldap_url }}"
-    dest: /home/ansible/guacamole-auth-ldap-1.0.0.tar.gz
+    dest: "{{ tmp_folder.path }}"
 
-- name: Extract the guacamole auth-ldap extension
+- name: Extract the guacamole auth-ldap extension   
   unarchive:
-    src: /home/ansible/guacamole-auth-ldap-1.0.0.tar.gz
+    src: '{{ tmp_folder.path }}/{{ guacamole_auth_ldap_version }}.tar.gz'
     dest: "{{ guacamole_extension_path }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
 
-- name: Copy the configuration to nginx server
+- name: Copy the configuration guacamole.properties server
   copy:
     src: guacamole.properties
     dest: /etc/guacamole/guacamole.properties
 
+- name: Download the jdbc plugin
+  get_url: 
+    url: "{{ guacamole_jdbc_url }}"
+    dest: "{{ tmp_folder.path }}"
+  
+- name: Extract the jdbc plugin
+  unarchive:
+    src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}.tar.gz'
+    dest: "{{ tmp_folder.path }}"
+    remote_src: yes
+    # extra_opts: [--strip-components=1]
+  
+- name: Copy JDBC module to extension directory
+  copy:
+    src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}/mysql/guacamole-auth-jdbc-mysql-1.0.0.jar'
+    dest: "{{ guacamole_extension_path }}"
+    remote_src: yes
+  
+- name: Download the mysql connector
+  get_url:
+    url: "{{ guacamole_jdbc_deb }}"
+    dest: "{{ tmp_folder.path }}"
+  
+- name: install Mysql connector
+  apt:
+    deb: '{{ tmp_folder.path }}/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb'
+  
+- name: create a link to guacamole lib folder
+  file:
+    src: /usr/share/java/mysql-connector-java-8.0.18.jar
+    dest: /etc/guacamole/lib/mysql-connector-java-8.0.18.jar
+    state: link
+    
+- name: Add a line to a file if the file does not exist, without passing regexp
+  lineinfile:
+    path: /etc/default/tomcat8
+    line: GUACAMOLE_HOME=/etc/guacamole
+
+- name: create a link of Guacamole path to tomcat root
+  file: 
+    src: /etc/guacamole
+    dest: /usr/share/tomcat8/.guacamole
+    state: link
+
+- name: Restore default Database Schema
+  mysql_db:
+    state: import
+    name: guacamole_db
+    target: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}/mysql/schema/{{item}}.sql'
+  with_items:
+    - 001-create-schema
+    - 002-create-admin-user
+  ignore_errors: yes
 - import_tasks: nginx.yml

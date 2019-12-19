@@ -8,6 +8,7 @@
   copy:
     src: nginx.conf
     dest: /etc/nginx/sites-available/gucamole.conf
+  notify: restart nginx
 
 - name: create symlink
   file:
