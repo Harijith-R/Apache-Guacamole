@@ -56,18 +56,13 @@
   get_url: 
     url: "{{ guacamole_ldap_url }}"
     dest: "{{ tmp_folder.path }}"
-
+  
 - name: Extract the guacamole auth-ldap extension   
   unarchive:
     src: '{{ tmp_folder.path }}/{{ guacamole_auth_ldap_version }}.tar.gz'
     dest: "{{ guacamole_extension_path }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
-
-- name: Copy the configuration guacamole.properties server
-  copy:
-    src: guacamole.properties
-    dest: /etc/guacamole/guacamole.properties
 
 - name: Download the jdbc plugin
   get_url: 
@@ -101,7 +96,12 @@
     src: /usr/share/java/mysql-connector-java-8.0.18.jar
     dest: /etc/guacamole/lib/mysql-connector-java-8.0.18.jar
     state: link
-    
+
+- name: Copy the configuration guacamole.properties server
+  copy:
+    src: guacamole.properties
+    dest: /etc/guacamole/guacamole.properties
+
 - name: Add a line to a file if the file does not exist, without passing regexp
   lineinfile:
     path: /etc/default/tomcat8
@@ -121,5 +121,6 @@
   with_items:
     - 001-create-schema
     - 002-create-admin-user
+
   ignore_errors: yes
 - import_tasks: nginx.yml

@@ -1,7 +1,7 @@
 ---
 - name: Install Nginx reverse proxy
   apt:
-    name: "{{gucamole_nginx_packages}}"
+    name: "{{ gucamole_nginx_packages }}"
     state: latest
 
 - name: Copy the configuration to nginx server
