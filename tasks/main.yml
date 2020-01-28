@@ -98,8 +98,8 @@
     state: link
 
 - name: Copy the configuration guacamole.properties server
-  copy:
-    src: guacamole.properties
+  template:
+    src: guacamole.properties.j2
     dest: /etc/guacamole/guacamole.properties
 
 - name: Add a line to a file if the file does not exist, without passing regexp

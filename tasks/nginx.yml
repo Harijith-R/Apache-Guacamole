@@ -5,8 +5,8 @@
     state: latest
 
 - name: Copy the configuration to nginx server
-  copy:
-    src: nginx.conf
+  template:
+    src: nginx.conf.j2
     dest: /etc/nginx/sites-available/gucamole.conf
   notify: restart nginx
 
