@@ -10,11 +10,6 @@ guacamole_nginx_server_name: guacamole.todayir.com
 #mysql credentials
 mysql_db_name: guacamole_db
 mysql_db_user: guacamole_user
-mysql_db_password: "8bNWqdiz2VpmkMovJS"
-
-#ldap connection credentials
-ldap_search_bind_user: guac-bind@asia.equitystory.local
-ldap_search_bind_password: "r5b7Ud5ghBGitjw8BjAtnGvW5jAf"
 ldap_host_name: 192.168.169.236
 
 guacamole_packages: [
