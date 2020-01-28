@@ -40,9 +40,9 @@ guacamole_server_path: "/home/ansible/guacamole-serve/"
 guacamole_client_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_client_version }}.war"
 guacamole_client_path: "/var/lib/tomcat8/webapps/"
 
-guacamole_ldap_url: https://apachemirror.wuchna.com/guacamole/1.0.0/binary/{{ guacamole_auth_ldap_version }}.tar.gz
-guacamole_jdbc_url: https://apachemirror.wuchna.com/guacamole/1.0.0/binary/{{ guacamole_auth_jdbc_version }}.tar.gz
-guacamole_jdbc_deb: https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb
+guacamole_ldap_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_auth_ldap_version }}.tar.gz"
+guacamole_jdbc_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_auth_jdbc_version }}.tar.gz"
+guacamole_jdbc_deb: "https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb"
 
 # guacamole_config_path: /etc/guacamole/
 guacamole_extension_path: /etc/guacamole/extensions/
