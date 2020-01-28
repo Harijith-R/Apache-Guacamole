@@ -10,7 +10,8 @@ guacamole_nginx_server_name: guacamole.todayir.com
 #mysql credentials
 mysql_db_name: guacamole_db
 mysql_db_user: guacamole_user
-ldap_host_name: 192.168.169.236
+
+ldap_host_name: 192.168.187.86
 
 guacamole_packages: [
     'libcairo2-dev',
@@ -33,14 +34,14 @@ guacamole_packages: [
     'tomcat8-common',
     'tomcat8-user' ]
 
-guacamole_server_url: "http://mirrors.estointernet.in/apache/guacamole/1.0.0/source/{{ guacamole_server_version }}.tar.gz"
+guacamole_server_url: "https://apachemirror.wuchna.com/guacamole/1.0.0/source/{{ guacamole_server_version }}.tar.gz"
 guacamole_server_path: "/home/ansible/guacamole-serve/"
 
-guacamole_client_url: "http://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_client_version }}.war"
+guacamole_client_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_client_version }}.war"
 guacamole_client_path: "/var/lib/tomcat8/webapps/"
 
-guacamole_ldap_url: http://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_auth_ldap_version }}.tar.gz
-guacamole_jdbc_url: http://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_auth_jdbc_version }}.tar.gz
+guacamole_ldap_url: https://apachemirror.wuchna.com/guacamole/1.0.0/binary/{{ guacamole_auth_ldap_version }}.tar.gz
+guacamole_jdbc_url: https://apachemirror.wuchna.com/guacamole/1.0.0/binary/{{ guacamole_auth_jdbc_version }}.tar.gz
 guacamole_jdbc_deb: https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb
 
 # guacamole_config_path: /etc/guacamole/
