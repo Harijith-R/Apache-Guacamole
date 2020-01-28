@@ -5,16 +5,16 @@ guacamole_auth_ldap_version: guacamole-auth-ldap-1.0.0
 guacamole_auth_jdbc_version: guacamole-auth-jdbc-1.0.0
 
 #nginx configuration
-guacamole_nginx_server_name: guacamole.eqs.com
+guacamole_nginx_server_name: guacamole.todayir.com
 
 #mysql credentials
 mysql_db_name: guacamole_db
 mysql_db_user: guacamole_user
-mysql_db_password: 
+mysql_db_password: "8bNWqdiz2VpmkMovJS"
 
 #ldap connection credentials
-ldap_search_bind_user: eqsjiralive@eqs.com
-ldap_search_bind_password: 
+ldap_search_bind_user: guac-bind@asia.equitystory.local
+ldap_search_bind_password: "r5b7Ud5ghBGitjw8BjAtnGvW5jAf"
 ldap_host_name: 192.168.169.236
 
 guacamole_packages: [
