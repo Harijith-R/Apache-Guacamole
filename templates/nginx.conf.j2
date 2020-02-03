@@ -9,7 +9,8 @@ server {
 
     ssl_protocols TLSv1.2;
     ssl_prefer_server_ciphers   on;
-
+    add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+    
     location / {
     proxy_pass http://localhost:8080/guacamole/;
     proxy_buffering off;
