@@ -69,6 +69,11 @@
     url: "{{ guacamole_jdbc_url }}"
     dest: "{{ tmp_folder.path }}"
   
+- name: Download the jdbc plugin
+  get_url: 
+    url: "{{ guacamole_duo_url }}"
+    dest: "{{ tmp_folder.path }}"
+
 - name: Extract the jdbc plugin
   unarchive:
     src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}.tar.gz'
@@ -81,6 +86,19 @@
     src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}/mysql/guacamole-auth-jdbc-mysql-1.0.0.jar'
     dest: "{{ guacamole_extension_path }}"
     remote_src: yes
+  
+- name: Extract  the Duo plugin
+  unarchive:
+    src: '{{ tmp_folder.path }}/{{ guacamole_duo_version }}.tar.gz'
+    dest: "{{ tmp_folder.path }}"
+    remote_src: yes
+
+- name: Copy Duo module to extension directory
+  copy:
+    src: '{{ tmp_folder.path }}/{{ guacamole_duo_version }}/{{ guacamole_duo_version }}.jar'
+    dest: "{{ guacamole_extension_path }}"
+    remote_src: yes
+  notify: restart tomcat
   
 - name: Download the mysql connector
   get_url:
