@@ -101,7 +101,7 @@
         dest: "{{ guacamole_extension_path }}"
         remote_src: yes
       notify: restart tomcat
-  when: guacamole_mfa_required is true
+  when: guacamole_mfa_required
   
 - name: Download the mysql connector
   get_url:

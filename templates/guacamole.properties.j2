@@ -25,8 +25,9 @@ mysql-password: {{ mysql_db_password }}
 #guacadmin
 
 #CN=EQS-GUAC-MEMBERS,OU=SecurityGroups,OU=Groups,OU=EQSAsia,DC=asia,DC=equitystory,DC=local
-
+{% if guacamole_mfa_required %}
 duo-api-hostname: {{ duo-api-hostname }}
 duo-integration-key: {{ duo-integration-key }}
 duo-secret-key: {{ duo-secret-key }}
 duo-application-key: {{ duo-application-key }}
+{% endif %}
