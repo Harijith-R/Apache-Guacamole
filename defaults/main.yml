@@ -3,6 +3,8 @@ guacamole_server_version: guacamole-server-1.0.0
 guacamole_client_version: guacamole-1.0.0
 guacamole_auth_ldap_version: guacamole-auth-ldap-1.0.0
 guacamole_auth_jdbc_version: guacamole-auth-jdbc-1.0.0
+guacamole_duo_version:  guacamole-auth-duo-1.0.0
+
 
 #nginx configuration
 guacamole_nginx_server_name: guacamole.todayir.com
@@ -44,6 +46,7 @@ guacamole_ldap_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/bina
 guacamole_jdbc_url: "https://mirrors.estointernet.in/apache/guacamole/1.0.0/binary/{{ guacamole_auth_jdbc_version }}.tar.gz"
 guacamole_jdbc_deb: "https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb"
 
+guacamole_duo_url: "https://archive.apache.org/dist/guacamole/1.0.0/binary/{{ guacamole_duo_version }}.tar.gz"
 # guacamole_config_path: /etc/guacamole/
 guacamole_extension_path: /etc/guacamole/extensions/
 # guacamole_lib_path: /etc/guacamole/lib/
