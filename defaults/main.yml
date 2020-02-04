@@ -4,6 +4,7 @@ guacamole_client_version: guacamole-1.0.0
 guacamole_auth_ldap_version: guacamole-auth-ldap-1.0.0
 guacamole_auth_jdbc_version: guacamole-auth-jdbc-1.0.0
 guacamole_duo_version:  guacamole-auth-duo-1.0.0
+guacamole_mfa_required: false
 
 
 #nginx configuration
