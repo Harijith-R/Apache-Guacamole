@@ -4,6 +4,22 @@
     name: "{{ gucamole_nginx_packages }}"
     state: latest
 
+- name: Create the certifaicte Directory
+  file:
+    path: /etc/ssl/eqs
+    state: directory
+    owner: root
+    group: root
+    mode: 755
+
+- name: Copy the SSL certificates
+  copy:
+    src: "{{ item }}"
+    dest: /etc/ssl/eqs/
+  with_items:
+    - eqs.crt
+    - eqs.key
+
 - name: Copy the configuration to nginx server
   template:
     src: nginx.conf.j2
