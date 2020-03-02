@@ -59,7 +59,7 @@
   
 - name: Extract the guacamole auth-ldap extension   
   unarchive:
-    src: '{{ tmp_folder.path }}/{{ guacamole_auth_ldap_version }}.tar.gz'
+    src: '{{ tmp_folder.path }}/guacamole-auth-ldap-{{ guacamole_auth_ldap_version }}.tar.gz'
     dest: "{{ guacamole_extension_path }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
@@ -72,14 +72,14 @@
 
 - name: Extract the jdbc plugin
   unarchive:
-    src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}.tar.gz'
+    src: '{{ tmp_folder.path }}/guacamole-auth-jdbc-{{ guacamole_auth_jdbc_version }}.tar.gz'
     dest: "{{ tmp_folder.path }}"
     remote_src: yes
     # extra_opts: [--strip-components=1]
   
 - name: Copy JDBC module to extension directory
   copy:
-    src: '{{ tmp_folder.path }}/{{ guacamole_auth_jdbc_version }}/mysql/guacamole-auth-jdbc-mysql-1.0.0.jar'
+    src: '{{ tmp_folder.path }}/guacamole-auth-jdbc-{{ guacamole_auth_jdbc_version }}/mysql/guacamole-auth-jdbc-mysql-{{ guacamole_auth_jdbc_version }}.jar'
     dest: "{{ guacamole_extension_path }}"
     remote_src: yes
 - name: Configure Duo mfa plugin
