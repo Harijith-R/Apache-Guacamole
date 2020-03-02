@@ -44,7 +44,7 @@ guacamole_client_url: "https://archive.apache.org/dist/guacamole/{{ guacamole_cl
 guacamole_client_path: "/var/lib/tomcat8/webapps/"
 
 guacamole_ldap_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_auth_ldap_version }}/binary/guacamole-auth-ldap-{{ guacamole_auth_ldap_version }}.tar.gz"
-guacamole_jdbc_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_auth_jdbc_version }/binary/guacamole-auth-jdbc-{{ guacamole_auth_jdbc_version }}.tar.gz"
+guacamole_jdbc_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_auth_jdbc_version }}/binary/guacamole-auth-jdbc-{{ guacamole_auth_jdbc_version }}.tar.gz"
 guacamole_jdbc_deb: "https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java_8.0.18-1ubuntu18.04_all.deb"
 
 guacamole_duo_url: "https://archive.apache.org/dist/guacamole/{{ guacamole_duo_version }}/binary/guacamole-auth-duo-{{ guacamole_duo_version }}.tar.gz"
