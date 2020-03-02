@@ -40,7 +40,7 @@ guacamole_packages: [
 guacamole_server_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_server_version }}/source/guacamole-server-{{ guacamole_server_version }}.tar.gz"
 guacamole_server_path: "/home/ansible/guacamole-serve/"
 
-guacamole_client_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_client_version }}/binary/guacamole-client-{{ guacamole_client_version }}.war"
+guacamole_client_url: "https://archive.apache.org/dist/guacamole/{{ guacamole_client_version }}/binary/guacamole-{{ guacamole_client_version }}.war"
 guacamole_client_path: "/var/lib/tomcat8/webapps/"
 
 guacamole_ldap_url: "https://mirrors.estointernet.in/apache/guacamole/{{ guacamole_auth_ldap_version }}/binary/guacamole-auth-ldap-{{ guacamole_auth_ldap_version }}.tar.gz"
