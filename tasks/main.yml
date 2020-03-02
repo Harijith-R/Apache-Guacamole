@@ -26,7 +26,7 @@
 - name: Download Client war file
   get_url:
     url: "{{ guacamole_client_url }}"
-    dest: '{{ guacamole_client_path }}/guacamole.war'
+    dest: '{{ guacamole_client_path }}guacamole.war'
   notify: restart tomcat
 
 - name: Extract the guacamole-server
