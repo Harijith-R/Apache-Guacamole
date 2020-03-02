@@ -118,7 +118,7 @@
     dest: /etc/guacamole/lib/mysql-connector-java-8.0.18.jar
     state: link
 
-- name: Copy the configuration guacamole.properties server
+- name: Copy the configuration file
   template:
     src: guacamole.properties.j2
     dest: /etc/guacamole/guacamole.properties
