@@ -10,9 +10,9 @@ ldap-encryption-method: none
 #ldap-search-bind-dn: CN=eqs jira,OU=Service Accounts,OU=EQSMuc,OU=_EQS,DC=equitystory,DC=local
 ldap-search-bind-dn: {{ ldap_search_bind_user }}
 ldap-search-bind-password: {{ ldap_search_bind_password }}
-ldap-config-base-dn: {{ ldap-config-base-dn }}
+ldap-config-base-dn: {{ ldap_config_base_dn }}
 ldap-user-base-dn: DC=equitystory,DC=local
-ldap-user-search-filter: {{ ldap-user-search-filter }}
+ldap-user-search-filter: {{ ldap_user_search_filter }}
 ldap-max-search-results:4000
 
 #Mysql Properties
