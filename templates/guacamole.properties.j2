@@ -3,16 +3,16 @@ guacd-port: 4822
 
 #LDAP connection properties
 ldap-hostname: {{ ldap_host_name }}
-ldap-port: 389
+ldap-port: 3268
 ldap-username-attribute: sAMAccountName
 ldap-encryption-method: none
 #ldap-search-bind-dn: CN=eqsjiralive,OU=Service Accounts,OU=EQSMuc,OU=_EQS,DC=equitystory,DC=local
 #ldap-search-bind-dn: CN=eqs jira,OU=Service Accounts,OU=EQSMuc,OU=_EQS,DC=equitystory,DC=local
 ldap-search-bind-dn: {{ ldap_search_bind_user }}
 ldap-search-bind-password: {{ ldap_search_bind_password }}
-ldap-config-base-dn: dc=asia, dc=equitystory,dc=local
-ldap-user-base-dn: dc=asia,DC=equitystory,DC=local
-ldap-user-search-filter: (&(objectCategory=Person)(sAMAccountName=*)(memberOf=CN=EQS-GUAC-MEMBERS,OU=SecurityGroups,OU=Groups,OU=EQSAsia,DC=asia,DC=equitystory,DC=local))
+ldap-config-base-dn: {{ ldap-config-base-dn }}
+ldap-user-base-dn: DC=equitystory,DC=local
+ldap-user-search-filter: {{ ldap-user-search-filter }}
 ldap-max-search-results:4000
 
 #Mysql Properties
