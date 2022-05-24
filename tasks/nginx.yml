@@ -6,7 +6,7 @@
 
 - name: Create the certifaicte Directory
   file:
-    path: /etc/ssl/eqs
+    path: /etc/ssl/
     state: directory
     owner: root
     group: root
@@ -15,10 +15,10 @@
 - name: Copy the SSL certificates
   copy:
     src: "{{ item }}"
-    dest: /etc/ssl/eqs/
+    dest: /etc/ssl/
   with_items:
-    - eqs.crt
-    - eqs.key
+    - ssl.crt
+    - ssl.key
 
 - name: Copy the configuration to nginx server
   template:

@@ -8,7 +8,7 @@ guacamole_mfa_required: false
 
 
 #nginx configuration
-guacamole_nginx_server_name: rdp-kochi.eqs.com
+guacamole_nginx_server_name: guacmole.domain.com
 
 #mysql credentials
 mysql_db_name: guacamole_db

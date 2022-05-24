@@ -6,12 +6,12 @@ ldap-hostname: {{ ldap_host_name }}
 ldap-port: 3268
 ldap-username-attribute: sAMAccountName
 ldap-encryption-method: none
-#ldap-search-bind-dn: CN=eqsjiralive,OU=Service Accounts,OU=EQSMuc,OU=_EQS,DC=equitystory,DC=local
-#ldap-search-bind-dn: CN=eqs jira,OU=Service Accounts,OU=EQSMuc,OU=_EQS,DC=equitystory,DC=local
+#ldap-search-bind-dn: CN=name,OU=Service Accounts,OU=NY,OU=OU,DC=domainname,DC=local
+#ldap-search-bind-dn: CN=name,OU=Service Accounts,OU=NY,OU=OU,DC=domainname,DC=local
 ldap-search-bind-dn: {{ ldap_search_bind_user }}
 ldap-search-bind-password: {{ ldap_search_bind_password }}
 ldap-config-base-dn: {{ ldap_config_base_dn }}
-ldap-user-base-dn: DC=equitystory,DC=local
+ldap-user-base-dn: DC=domainname,DC=local
 ldap-user-search-filter: {{ ldap_user_search_filter }}
 ldap-max-search-results: 4000
 
@@ -24,7 +24,6 @@ mysql-password: {{ mysql_db_password }}
 
 #guacadmin
 
-#CN=EQS-GUAC-MEMBERS,OU=SecurityGroups,OU=Groups,OU=EQSAsia,DC=asia,DC=equitystory,DC=local
 {% if guacamole_mfa_required %}
 duo-api-hostname: {{ duo-api-hostname }}
 duo-integration-key: {{ duo-integration-key }}
